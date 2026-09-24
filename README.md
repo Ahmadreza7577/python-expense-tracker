@@ -4,6 +4,10 @@ A command-line expense tracking application built with Python for managing perso
 
 The application stores expense data locally in a JSON file and provides features for adding, editing, deleting, searching, filtering, and analyzing expenses.
 
+## 📸 Application Preview
+
+![Python Expense Tracker](expense-tracker.png)
+
 ## ✨ Features
 
 - ➕ Add new expenses
