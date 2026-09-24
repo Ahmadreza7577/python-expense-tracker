@@ -1,0 +1,38 @@
+[
+    {
+        "title": "bus ticket",
+        "amount": 5.0,
+        "category": "transport",
+        "date": "2026-09-23"
+    },
+    {
+        "title": "pizza",
+        "amount": 25.5,
+        "category": "food",
+        "date": "2026-09-23"
+    },
+    {
+        "title": "car",
+        "amount": 10.0,
+        "category": "transport",
+        "date": "2026-09-23"
+    },
+    {
+        "title": "hamburger",
+        "amount": 15.0,
+        "category": "food",
+        "date": "2026-09-23"
+    },
+    {
+        "title": "grocery",
+        "amount": 25.0,
+        "category": "food",
+        "date": "2026-09-10"
+    },
+    {
+        "title": "laptop",
+        "amount": 880.0,
+        "category": "shopping",
+        "date": "2026-08-20"
+    }
+]
