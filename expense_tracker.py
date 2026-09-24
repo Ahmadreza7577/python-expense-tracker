@@ -219,6 +219,61 @@ def search_expenses(expenses):
             f"{expense['date']}"
         )
 
+
+def filter_by_category(expenses):
+    print("\n--- Filter by Category ---")
+
+    if not expenses:
+        print("No expenses found.")
+        return
+
+    valid_categories = [
+        "Food",
+        "Transport",
+        "Shopping",
+        "Bills",
+        "Other"
+    ]
+
+    category = input(
+        "Enter category (Food/Transport/Shopping/Bills/Other): "
+    ).strip().title()
+
+    if category not in valid_categories:
+        print("Invalid category.")
+        return
+
+    results = [
+        expense
+        for expense in expenses
+        if expense["category"] == category
+    ]
+
+    if not results:
+        print(f"No expenses found in {category}.")
+        return
+
+    print(f"\n--- {category} Expenses ---")
+
+    total = 0
+
+    for index, expense in enumerate(results, start=1):
+        print(
+            f"{index}. "
+            f"{expense['title']} | "
+            f"€{expense['amount']:.2f} | "
+            f"{expense['date']}"
+        )
+        total += expense["amount"]
+
+    print("-" * 35)
+    print(f"Category total: €{total:.2f}")
+
+
+
+
+
+
 def show_category_summary(expenses):
     print("\n--- Category Summary ---")
 
@@ -262,6 +317,92 @@ def delete_expense(expenses):
         print("Please enter a valid number.")
 
 
+
+
+def edit_expense(expenses):
+    print("\n--- Edit Expense ---")
+
+    if not expenses:
+        print("No expenses found.")
+        return
+
+    show_expenses(expenses)
+
+    try:
+        number = int(input("\nEnter expense number to edit: "))
+
+        if number < 1 or number > len(expenses):
+            print("Invalid expense number.")
+            return
+
+    except ValueError:
+        print("Please enter a valid number.")
+        return
+
+    expense = expenses[number - 1]
+
+    print("\nPress Enter to keep the current value.")
+
+    title = input(f"Title [{expense['title']}]: ").strip()
+
+    if title:
+        expense["title"] = title
+
+    amount_input = input(
+        f"Amount [{expense['amount']:.2f}]: "
+    ).strip()
+
+    if amount_input:
+        try:
+            amount = float(amount_input)
+
+            if amount <= 0:
+                print("Amount must be greater than 0.")
+                return
+
+            expense["amount"] = amount
+
+        except ValueError:
+            print("Please enter a valid number.")
+            return
+
+    valid_categories = [
+        "Food",
+        "Transport",
+        "Shopping",
+        "Bills",
+        "Other"
+    ]
+
+    category = input(
+        f"Category [{expense['category']}]: "
+    ).strip().title()
+
+    if category:
+        if category not in valid_categories:
+            print("Invalid category.")
+            return
+
+        expense["category"] = category
+
+    date_input = input(
+        f"Date [{expense['date']}]: "
+    ).strip()
+
+    if date_input:
+        try:
+            datetime.strptime(date_input, "%Y-%m-%d")
+            expense["date"] = date_input
+
+        except ValueError:
+            print("Invalid date format. Use YYYY-MM-DD.")
+            return
+
+    save_expenses(expenses)
+
+    print("Expense updated successfully.")
+
+
 def main():
     expenses = load_expenses()
 
@@ -277,7 +418,9 @@ def main():
         print("6. statistics")
         print("7. Monthly Report")
         print("8. Delete Expense")
-        print("9. Exit")
+        print("9. Edit Expense")
+        print("10. Filter by category")
+        print("11. Exit")
         choice = input("\nChoose an option: ").strip()
 
         if choice == "1":
@@ -295,18 +438,24 @@ def main():
         elif choice == "5":
             search_expenses(expenses)
        
-        elif choice =="6":
+        elif choice == "6":
             show_statistics(expenses)
 
-        elif choice =="7":
+        elif choice == "7":
             monthly_report(expenses)
         
         elif choice == "8":
-           delete_expense(expenses)
-      
+            delete_expense(expenses)
+
         elif choice == "9":
+            edit_expense(expenses)
+
+        elif choice == "10":
+            filter_by_category(expenses)
+        elif choice == "11":
            print("Goodbye!")
            break  
+
 
         else:
             print("Invalid choice. Please try again.")
