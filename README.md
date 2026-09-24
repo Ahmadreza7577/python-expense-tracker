@@ -6,7 +6,13 @@ The application stores expense data locally in a JSON file and provides features
 
 ## 📸 Application Preview
 
-![Python Expense Tracker](expense-tracker.png)
+### Main Interface
+
+![Expense Tracker Main Interface](expense-tracker-main.png)
+
+### Statistics & Reports
+
+![Expense Tracker Statistics](expense-tracker-statistics.png)
 
 ## ✨ Features
 
